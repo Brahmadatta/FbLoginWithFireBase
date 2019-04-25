@@ -1,11 +1,10 @@
-package escapadetechnologies.com.firebaseauthsexample;
+package Example.com.firebaseauthsexample;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +22,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -36,14 +34,16 @@ import com.squareup.picasso.Picasso;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    LoginButton login_button;
+    //LoginButton login_button;
+    Button login_button;
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
 
-    Button sign_out;
+    Button sign_out,nextActivity;
 
     private TextView mStatusTextView;
     private TextView mDetailTextView;
@@ -73,8 +73,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPhoto = findViewById(R.id.photo);
         mMetaData = findViewById(R.id.metaData);
         image = findViewById(R.id.image);
+        nextActivity = findViewById(R.id.nextActivity);
 
+        login_button.setOnClickListener(this);
         sign_out.setOnClickListener(this);
+        nextActivity.setOnClickListener(this);
 
         mCallbackManager = CallbackManager.Factory.create();
 
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });*/
 
-        login_button.setReadPermissions("email", "public_profile");
+        /*login_button.setReadPermissions("email", "public_profile");
         login_button.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -108,7 +111,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // [START_EXCLUDE]
                 updateUI(null);
             }
-        });
+        });*/
+
+
+        LoginManager.getInstance().registerCallback(
+                mCallbackManager,
+                new FacebookCallback < LoginResult > () {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // Handle success
+                        Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                        Log.d(TAG, "facebook:onCancel");
+                        // [START_EXCLUDE]
+                        updateUI(null);
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+
+                        Log.d(TAG, "facebook:onError", exception);
+                        // [START_EXCLUDE]
+                        updateUI(null);
+                    }
+                }
+        );
 
         // Add code to print out the key hash (Important ---> without these we can't access fb)
         try {
@@ -130,13 +162,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
 
-        // Pass the activity result back to the Facebook SDK
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
-    }
+            // Pass the activity result back to the Facebook SDK
+            mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        }
 
     // [START auth_with_facebook]
     private void handleFacebookAccessToken(AccessToken token) {
@@ -184,6 +216,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.sign_out:
 
                 signOut();
+
+                break;
+
+            case R.id.login_button:
+
+                LoginManager.getInstance().logInWithReadPermissions(
+                        this,
+                        Arrays.asList("email","public_profile")
+                );
+                break;
+
+
+            case R.id.nextActivity:
+
+                startActivity(new Intent(MainActivity.this,OtpVerificationActivity.class));
+                break;
         }
     }
 

@@ -1,4 +1,4 @@
-package escapadetechnologies.com.firebaseauthsexample;
+package Example.com.firebaseauthsexample;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;

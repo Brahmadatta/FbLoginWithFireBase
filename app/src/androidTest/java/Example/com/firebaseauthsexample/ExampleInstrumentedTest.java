@@ -1,4 +1,4 @@
-package escapadetechnologies.com.firebaseauthsexample;
+package Example.com.firebaseauthsexample;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

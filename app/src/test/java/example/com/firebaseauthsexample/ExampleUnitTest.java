@@ -1,4 +1,4 @@
-package Example.com.firebaseauthsexample;
+package example.com.firebaseauthsexample;
 
 import org.junit.Test;
 

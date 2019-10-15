@@ -1,4 +1,4 @@
-package Example.com.firebaseauthsexample;
+package example.com.firebaseauthsexample;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;

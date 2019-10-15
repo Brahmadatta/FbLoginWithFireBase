@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="Example.com.firebaseauthsexample">
+    package="example.com.firebaseauthsexample">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,13 +14,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <service
-            android:name="Example.com.firebaseauthsexample.InstanceId"
+            android:name="example.com.firebaseauthsexample.InstanceId"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name="Example.com.firebaseauthsexample.MessageService">
+        <service android:name="example.com.firebaseauthsexample.MessageService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -46,14 +46,14 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name="Example.com.firebaseauthsexample.MainActivity">
+        <activity android:name="example.com.firebaseauthsexample.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Example.com.firebaseauthsexample.OtpVerificationActivity"></activity>
+        <activity android:name="example.com.firebaseauthsexample.OtpVerificationActivity"></activity>
     </application>
 
 </manifest>

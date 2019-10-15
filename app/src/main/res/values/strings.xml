@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FireBaseAuthsExample</string>
-    <string name="facebook_app_id">xxxxxxxxxxxxx</string>
-    <string name="fb_login_protocol_scheme">xxxxxxxxxxx</string>
+    <string name="facebook_app_id">342020456384428</string>
+    <string name="fb_login_protocol_scheme">fb342020456384428</string>
     <string name="sign_out">Sign Out</string>
     <string name="login">login</string>
     <string name="next_activity">Next Activity</string>
